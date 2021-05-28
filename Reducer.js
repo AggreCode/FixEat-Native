@@ -15,12 +15,12 @@ export const initialState={
               price: 100 
            },
            {
-               id: "11",
+               id: "13",
                name:"biriyani",
                price: 100 
             },
               {
-                  id: "12",
+                  id: "14",
               name:"Mushroom",
                price: 100 
             }
@@ -47,12 +47,7 @@ export const initialState={
                const newOrderA =  [state.order,action.item]
     
                return {...state, order :newOrderA}  
-           case 'CANCEL_ORDER':
-               // let newOrder = state.order.filter((item)=>{
-               //     return action.id !== item.id
-               // })
-           
-                return {...state, order : []}     
+        
            case 'REMOVE_ORDER':
               
                let newOrder = state.order.filter((item,id)=>{

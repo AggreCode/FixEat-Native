@@ -6,44 +6,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import {useStateValue} from './StateProvider';
 import { AntDesign } from '@expo/vector-icons';
 
-const data =[
-    {   id: '1',
-        image : 'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'
-        ,name: 'Biriyani',
-        price: '100'
-       
-        
-    },
-    {  id: '2',
-        image : 'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'
-        ,name: 'Biriyani',
-        price: '100'
-        
-    },
-    {   id: '3',
-        image : 'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'
-        ,name: 'Biriyani',
-        price: '100'
-    },
-    {   id: '1',
-    image : 'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'
-    ,name: 'Biriyani',
-    price: '100'
-    
-},
-{  id: '2',
-    image : 'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'
-    ,name: 'Biriyani',
-    price: '100'
-},
-{   id: '3',
-    image : 'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'
-    ,name: 'Biriyani',
-    price: '100'
-}
-]
 
-const Dish_indi = ({image,dispatch,name,place,price,navigation})=>{
+
+const Dish_indi = ({image,dispatch,name,place,price,id,navigation})=>{
    const [amount,setAmount] = useState(1)
    const handlePlus=()=>{
        setAmount(amount+1)
@@ -57,7 +22,7 @@ const Dish_indi = ({image,dispatch,name,place,price,navigation})=>{
        dispatch({
            type: 'ADD_TO_BASKET',
            item:{
-               name,price: price*amount,place
+               name,price: price*amount,place,id
            }
        })
    }
@@ -103,7 +68,8 @@ const Dish_indi = ({image,dispatch,name,place,price,navigation})=>{
 
 
 const Dishes = ({navigation,route}) => {
-    const [{restaurants,basket},dispatch] = useStateValue()
+    let dishes = route.params.dishes
+     const [{basket},dispatch] = useStateValue()
     useLayoutEffect(()=>{
       navigation.setOptions({
           headerTitle: route.params.name,
@@ -131,13 +97,14 @@ const Dishes = ({navigation,route}) => {
             
               /> */}
               {
-                  data.map((item)=>(
+                  dishes.map((item,id)=>(
                  
                    <Dish_indi 
+                   key ={id}
                    navigation={navigation}
                    dispatch={dispatch}
              id={item.id}
-             image = {item.image}
+           
              name={item.name}
              place={route.params.name}
              price={item.price}

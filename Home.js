@@ -3,7 +3,7 @@ import React,{useState,useEffect,useLayoutEffect} from 'react';
 import { StyleSheet, Text,View, SafeAreaView } from 'react-native';
 import HomeMain from './HomeMain.js'
 
-import LinearGradient from 'react-native-linear-gradient';
+
 const Splashscreen=({navigation,route})=>{
   useLayoutEffect(()=>{
   navigation.setOptions({

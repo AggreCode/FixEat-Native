@@ -1,7 +1,9 @@
 import React ,{useLayoutEffect} from 'react'
 import { StyleSheet, Text, View,Dimensions,Image ,Button,Alert, TouchableOpacity} from 'react-native'
-import Carousel,{Pagination} from 'react-native-snap-carousel'
- const SLIDER_WIDTH = Dimensions.get('window').width + 80
+
+import { Entypo } from '@expo/vector-icons';
+
+const SLIDER_WIDTH = Dimensions.get('window').width + 80
  const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
 const HomeMain = ({navigation}) => {
@@ -10,6 +12,11 @@ const HomeMain = ({navigation}) => {
     useLayoutEffect(()=>{
       navigation.setOptions({
         headerShown: true,
+        headerRight : ()=>(
+          <TouchableOpacity style={{marginRight: 18}}  onPress={()=> navigation.navigate('auth')}>
+         <Text style={{marginBottom: 8,fontSize: 16,fontWeight: 'bold'}}>Login <Entypo name="login" size={24} color="black" /> </Text>
+          </TouchableOpacity>
+        )
       })
       },[])
     return (

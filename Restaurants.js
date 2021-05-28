@@ -1,46 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View ,Image, ScrollView,FlatList,TouchableOpacity} from 'react-native'
 // import {List,ListItem} from 'react-native-elements'
-const data =[
-    {   id: '1',
-        image : 'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'
-        ,name: 'Hotel Armaan',
-        place: 'Gurujanguli',
-        
-    },
-    {  id: '2',
-        image : 'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'
-        ,name: 'Hotel Armaan',
-        place: 'Gurujanguli',
-    },
-    {   id: '3',
-        image : 'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'
-        ,name: 'Hotel Armaan',
-        place: 'Gurujanguli',
-    },
-    {   id: '1',
-    image : 'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'
-    ,name: 'Hotel Armaan',
-    place: 'Gurujanguli',
-    
-},
-{  id: '2',
-    image : 'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'
-    ,name: 'Hotel Armaan',
-    place: 'Gurujanguli',
-},
-{   id: '3',
-    image : 'https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'
-    ,name: 'Hotel Armaan',
-    place: 'Gurujanguli',
-}
-]
-
+import {useStateValue} from './StateProvider'
   
 
-const Restaurant_indi = ({image,name,place,navigation})=>{
+const Restaurant_indi = ({image,name,place,navigation,dishes})=>{
+    
   return  <TouchableOpacity onPress={()=> navigation.navigate('dishes',{
-      name,place
+    dishes,
+    name
   })} style={styles.ele_container} activeOpacity={0.6}>
 
       <Image style={styles.stretch}
@@ -68,7 +36,7 @@ const Restaurants = ({navigation}) => {
     
     
     // );
-     
+     const [{restaurants},dispatch] = useStateValue()
     return (
         <View  style={styles.container}>
            
@@ -83,13 +51,13 @@ const Restaurants = ({navigation}) => {
              
                /> */}
                {
-                   data.map((item)=>(
+                   restaurants.map((item)=>(
                   
                     <Restaurant_indi 
                     navigation={navigation}
               id={item.id}
-              image = {item.image}
-              name={item.name}
+              dishes={item.dishes}
+              name={item.title}
               place={item.place}
               />
                

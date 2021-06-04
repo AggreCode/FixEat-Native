@@ -2,7 +2,7 @@ import React,{useLayoutEffect,useState} from 'react'
 import { StyleSheet, Button,Text, Image,View,ScrollView,TouchableOpacity } from 'react-native'
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons';
-
+import {auth} from './Firebase'
 import {useStateValue} from './StateProvider';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -19,12 +19,20 @@ const Dish_indi = ({image,dispatch,name,place,price,id,navigation})=>{
        setAmount(1)
    }
    const Add=()=>{
-       dispatch({
-           type: 'ADD_TO_BASKET',
-           item:{
-               name,price: price*amount,place,id
-           }
-       })
+     if(auth.currentUser){
+      dispatch({
+        type: 'ADD_TO_BASKET',
+        item:{
+            food:name,price,restaurant:place,id,amount
+        }
+    })
+
+     }
+     else {
+       alert('Please Login First')
+       navigation.replace('auth')
+     }
+     
    }
    
     return  <View style={styles.dish_contain} style={styles.ele_container} activeOpacity={0.6}>

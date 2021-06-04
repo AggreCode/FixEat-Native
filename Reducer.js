@@ -1,34 +1,53 @@
+
+
 export const initialState={
     restaurants: [{
-           id :"1",
-           title:"Hotel Arman",
-          place: "Gurujanguli",
-          rating : 5,
-          dishes:[{
-              id: "11",
-              name:"biriyani",
-              price: 100 
-           },
-             {
-                 id: "12",
-             name:"Mushroom",
-              price: 100 
-           },
+        id :"1",
+        title:"Hotel Arman",
+       place: "Gurujanguli",
+       rating : 5,
+       dishes:[{
+           id: "11",
+           name:"biriyani",
+           price: 100 
+        },
+          {
+              id: "12",
+          name:"Mushroom",
+           price: 100 
+        },
+        {
+            id: "11",
+            name:"biriyani",
+            price: 100 
+         },
            {
-               id: "13",
-               name:"biriyani",
-               price: 100 
-            },
-              {
-                  id: "14",
-              name:"Mushroom",
-               price: 100 
-            }
-       
-       ]
-       
-       },
-    ],
+               id: "12",
+           name:"Mushroom",
+            price: 100 
+         }
+    ]
+    
+    },
+    {
+        id :"2",
+        title:"Spectrum Club",
+       place: "Gurujanguli",
+       rating : 5,
+       dishes:[{
+           id: "21",
+           name:"biriyani",
+           price: 100 
+        },
+          {
+              id: "22",
+          name:"Mushroom",
+           price: 100 
+        }
+    ]
+    
+    },
+ ],
    
        basket:[],
     

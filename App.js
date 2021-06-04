@@ -13,8 +13,10 @@ import Order from './Order'
 import Auth from './Auth.js'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { AntDesign } from '@expo/vector-icons'; 
+import  HomeMain from './HomeMain'
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator()
+
 
 const globalScreenOptions={
   headerStyle:{ backgroundColor: "#2C6BED"}
@@ -39,8 +41,7 @@ function Root(){
         
         <Drawer.Screen  name="Your Cart"  options={{ headerShown: true}} component={Checkout} />
        
-      
-     <Drawer.Screen  name="Your Orders" options={{ headerShown: true}} component={Order} />
+           <Drawer.Screen  name="Your Orders" options={{ headerShown: true}} component={Order} />
      <Drawer.Screen  name="Login/Signup" options={{ headerShown: true}} component={Auth} />
             </Drawer.Navigator>
   
@@ -61,6 +62,8 @@ export default function App() {
      <Stack.Screen  name="checkout" component={Checkout} />
      <Stack.Screen  name="order" component={Order} />
      <Stack.Screen  name="auth" component={Auth} />
+   
+  
   
    </Stack.Navigator>
   </NavigationContainer>

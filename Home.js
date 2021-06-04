@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState,useEffect,useLayoutEffect} from 'react';
-import { StyleSheet, Text,View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text,View, SafeAreaView,ActivityIndicator } from 'react-native';
 import HomeMain from './HomeMain.js'
 
 
@@ -12,7 +12,8 @@ const Splashscreen=({navigation,route})=>{
   },[])
     return (
       <View style={styles.container} >
-       <Text style={{color:'white', fontSize:23}}>fixEat</Text> 
+       <Text style={{color:'white', fontSize:43, fontWeight: 'bold'}}>fixEat</Text> 
+         <ActivityIndicator size="large" color="#fff" />
       </View>
     )
   
@@ -23,7 +24,7 @@ export default function  Home({navigation,route}) {
   useEffect(()=>{
     setTimeout(function(){  
      setIsRendered(false)  
-    }, 5000);  
+    }, 2500);  
   },[])
   
   return (

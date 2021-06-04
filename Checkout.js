@@ -1,7 +1,10 @@
-import React,{useEffect} from 'react'
-import { StyleSheet, Text, View ,Dimensions, Alert,  ScrollView,Image,Button,TouchableOpacity} from 'react-native'
+import React,{useEffect,useState} from 'react'
+import { StyleSheet, Text, View ,Dimensions,KeyboardAvoidingView, Alert,  ScrollView,Image,Button,TouchableOpacity} from 'react-native'
 import {useStateValue} from  './StateProvider'
 import { FontAwesome } from '@expo/vector-icons';
+import {auth,db} from './Firebase'
+import  firebase from 'firebase'
+import { TextInput } from 'react-native';
 
 const Checkout_indi =({name,place,price,id,dispatch})=>{
     const removeBasket=()=>{
@@ -31,18 +34,45 @@ const Checkout_indi =({name,place,price,id,dispatch})=>{
 
 const Checkout = ({navigation}) => {
     const [{basket}, dispatch] = useStateValue()
+    const [address,setAddress] = useState('')
+    const [phone, setPhone] = useState('')
+    const [name, setName] = useState('')
     let total=0;
      basket.forEach((item)=>{
-         total+=item.price
+         total+=item.price*item.amount
      }
      )
      useEffect(()=>{
        
      },[basket])
      const AddOrder=()=>{
+        if(address === '') 
+        {return alert("please fill the address")
+          }
+           if(name=== '')
+          alert("please fill the name")
+          if(phone=== ''|| phone.length !== 10)
+          alert("please provide valid phone number")
+         if(!auth.currentUser){
+            Alert.alert('please login')
+            navigation.replace('auth')
+         }
+         
          if(total<150)
          Alert.alert('Min Order Value Rs 150')
          else{
+            db.collection('userOrders')
+            .doc(auth.currentUser.email.substring(0,auth.currentUser.email.length - 10))
+            .collection('order')
+            .add({   name, phone, basket,address,total
+            })
+            db.collection('orders')
+ 
+            .add({  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              name, phone, basket,address,total
+            })
+         
+
             dispatch({
                 type: 'ADD_ORDER',
                 item: basket
@@ -60,14 +90,18 @@ const Checkout = ({navigation}) => {
     return (
         <View  style={styles.container}>
               <ScrollView > 
-     
+     <KeyboardAvoidingView>
+         <TextInput style={[styles.input,{height: 80}]} value={address} onChangeText={setAddress} placeholder='Enter Delivery Address'/>
+         <TextInput style={styles.input} value={name} onChangeText={setName} placeholder='Enter  Name'/>
+         <TextInput style={styles.input} value={phone} onChangeText={setPhone} placeholder='Enter Phone number'/>
+     </KeyboardAvoidingView>
      {
          basket.map((item,id)=>(
              <Checkout_indi
               key={id}
               id={item.id}
-              name={item.name}
-              place={item.place}
+              name={item.food}
+              place={item.restaurant}
               price={item.price}
               dispatch={dispatch}
              />
@@ -98,6 +132,17 @@ const styles = StyleSheet.create({
     flex: 1,
 
      
+    },
+   
+    input:{
+        width: 290,
+        backgroundColor: '#fff',
+        borderColor: '#ccc',
+     marginHorizontal: 10,
+
+     marginVertical: 10,
+        height: 40,
+        padding: 10
     },
     stretch:{
         width: 100,
@@ -145,8 +190,8 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         backgroundColor: '#ff471a',
-        marginTop: 5,
-        marginBottom: 13,
+        marginTop: 10,
+        marginBottom: 6,
         marginLeft: 80,
         borderRadius: 11
     }

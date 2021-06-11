@@ -37,7 +37,8 @@ const Checkout = ({navigation}) => {
     const [address,setAddress] = useState('')
     const [phone, setPhone] = useState('')
     const [name, setName] = useState('')
-    let total=0;
+    let total =0;
+    
      basket.forEach((item)=>{
          total+=item.price*item.amount
      }
@@ -111,7 +112,7 @@ const Checkout = ({navigation}) => {
   <View style={styles.rashid}>
       <View style={styles.hr}>
       <Text style={{fontSize:16}}>Order Price  :- <FontAwesome style={{marginTop: 4}}name="rupee" size={17} color="black" /> {total} /</Text>
-      <Text style={{fontSize:16,marginTop: 4,marginBottom:4}}>Delivery Price :- <Text style={{color:'green'}}>Free</Text></Text>
+      <Text style={{fontSize:16,marginTop: 4,marginBottom:4}}>Delivery Price :- <Text style={{color:'green'}}>Free</Text> </Text>
   
       </View>
       <Text style={{fontSize:16,marginTop: 4}}>Total Price  :- <FontAwesome style={{marginTop: 4}}name="rupee" size={17} color="black" />{total} /-</Text>

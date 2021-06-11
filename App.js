@@ -14,6 +14,8 @@ import Auth from './Auth.js'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { AntDesign } from '@expo/vector-icons'; 
 import  HomeMain from './HomeMain'
+import {useStateValue} from './StateProvider'
+import {db} from './Firebase'
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator()
 
@@ -47,7 +49,8 @@ function Root(){
   
   )
 }
-export default function App() {
+const App = () => {
+  
  
   return (
   <StateProvider initialState={initialState} reducer={reducer}>
@@ -82,3 +85,4 @@ const styles = StyleSheet.create({
     
   },
 });
+ export default App

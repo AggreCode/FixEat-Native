@@ -1,6 +1,6 @@
 import React ,{useLayoutEffect,useEffect} from 'react'
 import { StyleSheet, Text, ScrollView,View,Dimensions,Image ,Button,Alert, TouchableOpacity} from 'react-native'
-import {auth} from './Firebase'
+import {auth,db} from './Firebase'
 import { Entypo } from '@expo/vector-icons';
 import {useStateValue} from './StateProvider'
 import { MaterialIcons } from '@expo/vector-icons'; 
@@ -10,7 +10,7 @@ const SLIDER_WIDTH = Dimensions.get('window').width + 80
  const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
 const HomeMain = ({navigation}) => {
-  const [{user},dispatch] = useStateValue()
+  const [{restaurants,offers},dispatch] = useStateValue()
 
   useEffect(()=>{
  
@@ -43,13 +43,13 @@ const HomeMain = ({navigation}) => {
       })},[])
     return (
         <View style={styles.container}>
-          <ScrollView horizontal={true} style={{height:200,backgroundColor: '#fff'}}>
+          <ScrollView   horizontal={true} style={{height:200,backgroundColor: '#fff'}}>
             <Image 
             source={require("./assets/images/QuickDelivery.jpg")} style={styles.stretch}/>
               <Image 
-            source={require("./assets/images/QuickDelivery.jpg")} style={styles.stretch}/>
+            source={require("./assets/images/foodmask.png")} style={styles.stretch}/>
               <Image 
-            source={require("./assets/images/QuickDelivery.jpg")} style={styles.stretch}/>
+            source={require("./assets/images/food2.jpeg")} style={styles.stretch}/>
         
           </ScrollView>
          
@@ -117,7 +117,11 @@ const HomeMain = ({navigation}) => {
                title="Order Now"
                color="#ff471a"
            
-               onPress={() => navigation.navigate('Restaurants')}
+               onPress={() =>{
+                    navigation.navigate('Restaurants')
+        
+           
+               } }
              />
           </View>
           <View style={styles.box}>
@@ -143,6 +147,9 @@ const HomeMain = ({navigation}) => {
            
         
             </TouchableOpacity>
+            </View>
+            <View>
+
             </View>
          
         </View>

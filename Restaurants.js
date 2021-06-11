@@ -1,8 +1,8 @@
-import React from 'react'
+import React , {useEffect,useState} from  'react'
 import { StyleSheet, Text, View ,Image, ScrollView,FlatList,TouchableOpacity} from 'react-native'
 // import {List,ListItem} from 'react-native-elements'
-import {useStateValue} from './StateProvider'
-  
+import {db} from './Firebase'
+  import {useStateValue} from './StateProvider'
 
 const Restaurant_indi = ({image,name,place,navigation,dishes})=>{
     
@@ -24,19 +24,9 @@ const Restaurant_indi = ({image,name,place,navigation,dishes})=>{
 }
 
 const Restaurants = ({navigation}) => {
-    // const renderItem = ({ item }) => (
-      
-    //       <Restaurant_indi 
-    // id={item.id}
-    // image = {item.image}
-    // name={item.name}
-    // place={item.place}
-    // />
-      
-    
-    
-    // );
-     const [{restaurants},dispatch] = useStateValue()
+  
+  
+    const [{restaurants},dispatch] = useStateValue()
     return (
         <View  style={styles.container}>
            
@@ -45,13 +35,9 @@ const Restaurants = ({navigation}) => {
             
             </View>
             <ScrollView>
-               {/* <FlatList
-               data={data}
-               renderItem={renderItem}
-             
-               /> */}
+         
                {
-                   restaurants.map((item)=>(
+                   restaurants?.map((item)=>(
                   
                     <Restaurant_indi 
                     navigation={navigation}
@@ -59,6 +45,7 @@ const Restaurants = ({navigation}) => {
               dishes={item.dishes}
               name={item.title}
               place={item.place}
+          
               />
                
                    ))

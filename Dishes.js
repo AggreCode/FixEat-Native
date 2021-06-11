@@ -34,11 +34,12 @@ const Dish_indi = ({image,dispatch,name,place,price,id,navigation})=>{
      }
      
    }
+  
    
     return  <View style={styles.dish_contain} style={styles.ele_container} activeOpacity={0.6}>
   
         <Image style={styles.stretch}
-        source={{uri: 'https://thumbs.dreamstime.com/b/chicken-biryani-traditional-indian-rice-dish-served-clay-pot-top-view-image-one-meal-108805407.jpg'}}/>
+        source={{uri: image}}/>
   
   
         <View style={styles.inner_ele}>
@@ -112,10 +113,11 @@ const Dishes = ({navigation,route}) => {
                    navigation={navigation}
                    dispatch={dispatch}
              id={item.id}
-           
+             image={item.imgUrl}
              name={item.name}
              place={route.params.name}
              price={item.price}
+         
              />
               
                   ))
